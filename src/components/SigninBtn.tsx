@@ -1,18 +1,20 @@
 "use client";
-import { Session } from "next-auth";
+
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 
 const SigninBtn = () => {
   const { data: session } = useSession(); //pke useSession untuk tau apakah sdh authenticated atau belum
-  // console.log({ session });
 
   if (session && session.user) {
     return (
-      <div className="font-bold text-lg">
-        <p>{session.user.email}</p>
-        <Link href={"/api/auth/signout"} className="bg-blue-500 ">
+      <div className=" flex gap-5 justify-center items-center">
+        <p className="text-[16px] font-semibold">{session.user.username}</p>
+        <Link
+          href={"/api/auth/signout"}
+          className="font-bold bg-gray-200 text-lg hover:bg-gray-100 rounded-md p-1 ps-2 pe-2"
+        >
           Sign out
         </Link>
       </div>

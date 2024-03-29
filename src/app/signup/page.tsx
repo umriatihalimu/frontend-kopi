@@ -3,6 +3,7 @@ import { baseurl } from "@/lib/variabel";
 import React, { useRef } from "react";
 
 interface FormInput {
+  username: string;
   email: string;
   password: string;
 }
@@ -12,6 +13,7 @@ const Signup = () => {
     const res = await fetch(baseurl + "/auth/signup", {
       method: "POST",
       body: JSON.stringify({
+        username: data.current.username,
         email: data.current.email,
         password: data.current.password,
       }),
@@ -28,6 +30,7 @@ const Signup = () => {
 
   // untuk ubah inputannya
   const data = useRef<FormInput>({
+    username: "",
     email: "",
     password: "",
   });
@@ -37,6 +40,13 @@ const Signup = () => {
       <div className="border p-3 w-[500px] ">
         <h1 className="text-[28px] font-bold ">Buat Akun Baru</h1>
         <form action="" className="flex flex-col ms-2 me-2 ">
+          <input
+            type="text"
+            placeholder="Name"
+            required
+            className="p-2 mt-4 border rounded-sm"
+            onChange={(e) => (data.current.username = e.target.value)}
+          />
           <input
             type="text"
             placeholder="Email"
